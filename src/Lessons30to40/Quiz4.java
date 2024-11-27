@@ -1,6 +1,6 @@
 package Lessons30to40;
 
-import java.util.*;
+
 
 
 public class Quiz4 {
@@ -43,14 +43,17 @@ public class Quiz4 {
 //        check number char in certain scale (97 to 122)
         text = text.toLowerCase();
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < text.length(); i++) {
-            if (97 <= text.charAt(i) <= 122){
-                result.append(text.charAt(i));
-        }
-        System.out.println(x);
-        return "123";
-    }
 
+        for (int i = 0; i < text.length(); i++) {
+            if (97 <= text.charAt(i) && text.charAt(i) <= 122) {
+                result.append((int) text.charAt(i) - 96).append(" ");
+            }
+        }
+
+
+        return result.toString();
+
+    }
 }
 
 
