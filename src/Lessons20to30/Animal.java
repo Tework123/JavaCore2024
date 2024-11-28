@@ -2,7 +2,7 @@ package Lessons20to30;
 
 import Lessons20to30.Interfaces.Actions;
 
-public class Animal implements Actions {
+public abstract class Animal implements Actions {
     private int price;
 
     public Animal() {
