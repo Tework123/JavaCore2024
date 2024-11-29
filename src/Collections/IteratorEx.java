@@ -1,14 +1,23 @@
 package Collections;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class IteratorEx {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         MyLinkedList myLinkedList = new MyLinkedList();
         myLinkedList.add(5);
         myLinkedList.add(6);
-        System.out.println(myLinkedList.get(1).getValue());
+        myLinkedList.add(7);
+        myLinkedList.add(8);
+        System.out.println(myLinkedList.get(3).getValue());
+        System.out.println(myLinkedList.get(2).getValue());
+        myLinkedList.delete(2);
+        System.out.println(myLinkedList.get(2).getValue());
+        System.out.println(myLinkedList.getAll());
+
+
 // add extra function to linkedList on base file
     }
 }
@@ -31,17 +40,44 @@ class MyLinkedList {
 
     }
 
-    public Element get(int index) {
+    public Element get(int index) throws IOException {
         int currentIndex = 0;
         Element element = this.head;
         while (currentIndex != index) {
             element = element.getNext();
+            if (element == null) {
+                throw new IOException("No this index");
+            }
             currentIndex += 1;
         }
         return element;
     }
 
-    public static void next() {
+    public void delete(int index) throws IOException {
+        int currentIndex = 0;
+        Element element = this.head;
+        while (currentIndex != index) {
+            element = element.getNext();
+            if (element == null) {
+                throw new IOException("No this index");
+            }
+            currentIndex += 1;
+        }
+        Element prevElement = element.getPrev();
+        Element nextElement = element.getNext();
+        prevElement.setNext(nextElement);
+        nextElement.setPrev(prevElement);
+    }
+
+    public List<Element> getAll() {
+        List<Element> list = new ArrayList<>();
+        Element element = this.head;
+
+        while (element.getNext() != null) {
+            list.add(element);
+            element = element.getNext();
+        }
+        return list;
     }
 
 
@@ -79,5 +115,12 @@ class Element {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "Element{" +
+                "value=" + value +
+                '}';
     }
 }
